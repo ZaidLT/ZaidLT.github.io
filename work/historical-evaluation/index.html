@@ -1,0 +1,101 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Building the memory evaluation harness | Zaid Lattouf</title><meta name="description" content="Memory retrieval evaluation results across model configurations and query categories, April 2026."><meta name="theme-color" content="#081526"><link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="../../assets/fonts.css"><link rel="stylesheet" href="../../assets/styles.css"><script defer src="../../assets/vendor/gsap.min.js"></script><script defer src="../../assets/studio.js"></script><script defer src="../../assets/overview.js"></script></head>
+<body class="case-page"><a class="skip-link" href="#main">Skip to content</a><header class="site-header"><a class="wordmark" href="../../index.html" aria-label="Zaid Lattouf home"><svg viewBox="0 0 36 36" width="36" height="36" aria-hidden="true"><path d="M6 10h16L6 26h16M27 10v16h5" fill="none" stroke="currentColor" stroke-width="2.5"/></svg><span>Zaid Lattouf</span></a><nav aria-label="Primary navigation"><a href="../../index.html#work">Work</a><a href="../../index.html#capabilities">Capabilities</a><a href="../../cv/index.html">Career</a><a href="mailto:zaid.lattouf@gmail.com">Contact</a></nav></header><main id="main" tabindex="-1"><section class="case-top"><div class="case-meta"><span>Retrieval engineering</span><span>Memory retrieval evaluation · April 2026</span></div><h1>Building the memory evaluation harness</h1><div class="page-actions"><a href="../../index.html#work" class="back-link">All selected work</a></div><dl class="case-facts"><div><dt>Problem</dt><dd>Measure retrieval quality and choose how memory should be represented and ranked for the agent platform.</dd></div><div><dt>My contribution</dt><dd>Authored the memory retrieval evaluation harness and ran the experiment: 303 facts and 729 queries.</dd></div><div><dt>Outcome</dt><dd>OpenAI + Markdown reached 93.8% Recall@3 and 0.878 MRR@3 on 729 queries; configuration and category reports supported the selection.</dd></div></dl></section>
+    <figure class="case-visual"><div class="historical-visual"><p class="visual-label">Observed results on 729 queries, 10 April 2026</p><div class="configuration"><strong>OpenAI + Markdown</strong><div class="bar-row"><span>Recall@1</span><div class="bar-track"><i style="--bar:82.7%"></i></div><b>82.7%</b></div><div class="bar-row candidate"><span>Recall@3</span><div class="bar-track"><i style="--bar:93.8%"></i></div><b>93.8%</b></div></div><div class="configuration"><strong>OpenAI + JSON</strong><div class="bar-row"><span>Recall@1</span><div class="bar-track"><i style="--bar:82.4%"></i></div><b>82.4%</b></div><div class="bar-row candidate"><span>Recall@3</span><div class="bar-track"><i style="--bar:93.0%"></i></div><b>93.0%</b></div></div><div class="configuration"><strong>Google + JSON</strong><div class="bar-row"><span>Recall@1</span><div class="bar-track"><i style="--bar:81.3%"></i></div><b>81.3%</b></div><div class="bar-row candidate"><span>Recall@3</span><div class="bar-track"><i style="--bar:94.7%"></i></div><b>94.7%</b></div></div><div class="configuration"><strong>Google + Markdown</strong><div class="bar-row"><span>Recall@1</span><div class="bar-track"><i style="--bar:81.3%"></i></div><b>81.3%</b></div><div class="bar-row candidate"><span>Recall@3</span><div class="bar-track"><i style="--bar:94.0%"></i></div><b>94.0%</b></div></div><p>Each bar uses a 0–100% scale. Recall@1 and Recall@3 describe different consumption patterns.</p></div><figcaption>Four configurations evaluated on the same 303 facts and 729 queries. Scores retain their configuration and ranking cutoff.</figcaption></figure>
+    <div class="article-layout"><article class="prose "><p>I authored a retrieval evaluation harness that tested <strong>303 facts against 729 queries</strong> across four model and data-format configurations. The OpenAI + Markdown configuration reached <strong>93.8% Recall@3 and 0.878 MRR@3</strong>.</p>
+<p>I built the harness and ran the experiment to guide memory retrieval for the agent platform. It scored expected facts, reported individual query outcomes and compared performance across direct, paraphrased, temporal and adversarial questions.</p>
+<h2 id="turn-retrieval-results-into-a-configuration-decision">Turn retrieval results into a configuration decision</h2>
+<p>I compared OpenAI and Google embeddings with JSON and Markdown representations, keeping the facts and query set consistent across configurations. Aggregate scores established the overall result, while category reports showed where ranking behavior changed.</p>
+<p>OpenAI + Markdown led on Recall@1, which informed the retained report's recommendation. Google + JSON led on Recall@3. That distinction made configuration choice depend on how the agent consumed retrieved evidence.</p>
+<h2 id="experiment-and-construction">Experiment and construction</h2>
+<p>The report was generated on <strong>10 April 2026</strong>. It evaluated <strong>303 home-management facts, including 110 adversarial facts, against 729 queries</strong>. Local fact definitions and a query-construction module produced this internal benchmark and its expected-fact mappings.</p>
+<p>Each query identified <strong>one expected fact ID</strong>. The same facts were represented as JSON or Markdown. Each model/configuration used its own pgvector table; queries remained plain text. Retrieval used cosine distance and returned three candidates.</p>
+<ul>
+<li>OpenAI: <code>text-embedding-3-large</code>, 3,072 dimensions.</li>
+<li>Google: <code>models/gemini-embedding-001</code>, 3,072 dimensions.</li>
+<li>Recall@1 / Recall@3: fraction of queries with the expected fact in that prefix.</li>
+<li>MRR@3: reciprocal rank of that fact within the first three results, zero when absent.</li>
+</ul>
+<p>The report's MRR values are shown as <strong>MRR@3</strong>, reflecting its three-result cutoff.</p>
+<h2 id="observed-results">Observed results</h2>
+<div class="table-scroll" role="region" aria-label="Results table, scroll horizontally if needed" tabindex="0"><table>
+<thead>
+<tr>
+<th scope="col">Configuration</th>
+<th style="text-align:right">Recall@1</th>
+<th style="text-align:right">Recall@3</th>
+<th style="text-align:right">MRR@3</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>OpenAI + Markdown</td>
+<td style="text-align:right">82.7%</td>
+<td style="text-align:right">93.8%</td>
+<td style="text-align:right">0.878</td>
+</tr>
+<tr>
+<td>OpenAI + JSON</td>
+<td style="text-align:right">82.4%</td>
+<td style="text-align:right">93.0%</td>
+<td style="text-align:right">0.873</td>
+</tr>
+<tr>
+<td>Google + JSON</td>
+<td style="text-align:right">81.3%</td>
+<td style="text-align:right">94.7%</td>
+<td style="text-align:right">0.875</td>
+</tr>
+<tr>
+<td>Google + Markdown</td>
+<td style="text-align:right">81.3%</td>
+<td style="text-align:right">94.0%</td>
+<td style="text-align:right">0.872</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="category-level-results">Category-level results</h2>
+<p>Selected OpenAI + Markdown Recall@1 slices:</p>
+<p>These category scores measure first-result accuracy (Recall@1). The headline 93.8% measures finding the expected fact among the top three results (Recall@3). Adversarial queries tested difficult ranking cases, including facts with similar wording across different household domains.</p>
+<div class="table-scroll" role="region" aria-label="Results table, scroll horizontally if needed" tabindex="0"><table>
+<thead>
+<tr>
+<th scope="col">Original difficulty label</th>
+<th style="text-align:right">Recall@1</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>direct</td>
+<td style="text-align:right">95.6%</td>
+</tr>
+<tr>
+<td>paraphrase</td>
+<td style="text-align:right">96.5%</td>
+</tr>
+<tr>
+<td>adversarial_temporal</td>
+<td style="text-align:right">78.2%</td>
+</tr>
+<tr>
+<td>adversarial_entity</td>
+<td style="text-align:right">78.3%</td>
+</tr>
+<tr>
+<td>adversarial_semantic</td>
+<td style="text-align:right">58.7%</td>
+</tr>
+<tr>
+<td>adversarial_minimal</td>
+<td style="text-align:right">58.3%</td>
+</tr>
+<tr>
+<td>adversarial_crossdomain</td>
+<td style="text-align:right">30.8%</td>
+</tr>
+</tbody>
+</table></div>
+<p>The category breakdown made ranking differences visible during evaluation. Keeping the full results alongside the overall score supported configuration decisions and focused inspection of individual retrieval outcomes.</p>
+</article>
+    <aside><nav aria-label="On this page"><p>On this page</p><a href="#turn-retrieval-results-into-a-configuration-decision">Turn retrieval results into a configuration decision</a><a href="#experiment-and-construction">Experiment and construction</a><a href="#observed-results">Observed results</a><a href="#category-level-results">Category-level results</a></nav></aside></div>
+    <section class="next-work"><h2>Keep exploring.</h2><div><a href="../agent-platform/index.html">Agent platform</a><a href="index.html">Retrieval evaluation</a><a href="../appliance-knowledge-platform/index.html">Data pipelines</a><a href="../infrastructure-migrations/index.html">Infrastructure and migrations</a><a href="../cloud-operations/index.html">Cloud operations</a></div></section></main>
+<footer class="site-footer"><div><p>Have a useful problem to solve?</p><h2>Let's build it.</h2><a href="mailto:zaid.lattouf@gmail.com">zaid.lattouf@gmail.com</a></div><div class="footer-details"><p>Remote · working with teams worldwide<br>Worked Eastern Time hours at eeva<br>Canadian &amp; Jordanian citizen</p></div></footer></body></html>
