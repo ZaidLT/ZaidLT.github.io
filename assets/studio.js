@@ -21,7 +21,6 @@
   let timer = null;
   let selection = 0;
   let mode = 'idle';
-  let approved = false;
 
   function cancel() {
     if (timeline) { timeline.kill(); timeline = null; }
@@ -30,12 +29,11 @@
   }
   function controls(nextMode) {
     mode = nextMode;
-    playLabel.textContent = mode === 'running' ? 'Pause walkthrough' : mode === 'waiting' ? 'Approve' : mode === 'complete' ? 'Replay walkthrough' : 'Play walkthrough';
+    playLabel.textContent = mode === 'running' ? 'Pause walkthrough' : mode === 'waiting' ? 'Continue walkthrough' : mode === 'complete' ? 'Replay walkthrough' : 'Play walkthrough';
     play.toggleAttribute('data-waiting', mode === 'waiting');
     system.dataset.mode = mode;
   }
   function select(index, animate = true) {
-    if (index === 4 && !approved) index = 3;
     selection = index;
     nodes.forEach((node, i) => {
       node.classList.toggle('is-active', i === index);
@@ -83,16 +81,16 @@
     node.addEventListener('click', () => {
       cancel();
       select(index);
-      controls(selection === 3 ? 'waiting' : selection === 4 ? 'complete' : 'idle');
+      controls(index === 3 ? 'waiting' : index === 4 ? 'complete' : 'idle');
     });
   });
   play.addEventListener('click', () => {
     if (mode === 'running') { cancel(); controls('idle'); return; }
-    if (mode === 'waiting') { cancel(); approved = true; select(4); controls('complete'); return; }
+    if (mode === 'waiting') { cancel(); select(4); controls('complete'); return; }
     if (selection >= 3) select(0, false);
     runToApproval(selection + 1);
   });
-  reset.addEventListener('click', () => { cancel(); approved = false; select(0, false); controls('idle'); });
+  reset.addEventListener('click', () => { cancel(); select(0, false); controls('idle'); });
   motion.addEventListener('change', () => {
     cancel();
     select(selection, false);
