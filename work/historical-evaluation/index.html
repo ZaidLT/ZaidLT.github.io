@@ -1,0 +1,105 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Evaluating memory retrieval | Zaid Lattouf</title><meta name="description" content="Memory retrieval evaluation results across model configurations and query categories, April 2026."><meta name="theme-color" content="#030507"><meta property="og:type" content="website"><meta property="og:title" content="Evaluating memory retrieval | Zaid Lattouf"><meta property="og:description" content="Memory retrieval evaluation results across model configurations and query categories, April 2026."><meta property="og:image" content="https://zaidlt.github.io/assets/social-preview.png"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:image:alt" content="Zaid Lattouf, AI Engineer. Production AI, data and cloud systems."><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Evaluating memory retrieval | Zaid Lattouf"><meta name="twitter:description" content="Memory retrieval evaluation results across model configurations and query categories, April 2026."><meta name="twitter:image" content="https://zaidlt.github.io/assets/social-preview.png"><link rel="icon" href="../../assets/favicon.svg"><link rel="stylesheet" href="../../assets/fonts.css?v=a53084251e"><link rel="stylesheet" href="../../assets/styles.css?v=1ba611f740"><link rel="stylesheet" href="../../assets/hybrid.css?v=24bb07cfa6"><link rel="stylesheet" href="../../assets/motion.css?v=0cb895c8e2"><script defer src="../../assets/vendor/gsap.min.js?v=92bb9a9647"></script><script defer src="../../assets/studio.js?v=02208aced8"></script><link rel="stylesheet" href="../../assets/unified.css?v=c70b665ad1"><link rel="stylesheet" href="../../assets/royal.css?v=a1c5f57ee1"><link rel="stylesheet" href="../../assets/work-first.css?v=5254006f2c"><link rel="stylesheet" href="../../assets/editorial.css?v=bafb478ac7"><link rel="stylesheet" href="../../assets/evidence-motion.css?v=e5bb053fc3"><script defer src="../../assets/evidence-motion.js?v=22007960ba"></script><meta property="og:url" content="https://zaidlt.github.io/work/historical-evaluation/"></head>
+<body data-page="historical-evaluation" class="case-page"><a class="skip-link" href="#main">Skip to content</a><header class="site-header"><a class="wordmark" href="../../index.html" aria-label="Zaid Lattouf home"><span class="monogram" aria-hidden="true">ZL</span><span>Zaid Lattouf</span></a><nav aria-label="Primary navigation"><a href="../../index.html#work">Work</a><a href="../../capabilities/index.html">Capabilities</a><a class="contact-link" href="mailto:zaid.lattouf@gmail.com">Contact <span aria-hidden="true">↗</span></a></nav></header><main id="main" tabindex="-1"><section class="case-top"><div class="case-meta"><span>Retrieval engineering</span><span>Memory retrieval evaluation · April 2026</span></div><h1>Evaluating memory retrieval</h1><div class="page-actions"><a href="../../index.html#work" class="back-link">All selected work</a></div><dl class="case-facts"><div><dt>Problem</dt><dd>Measure retrieval quality and choose how memory should be represented and ranked for the agent platform.</dd></div><div><dt>My contribution</dt><dd>Authored the memory retrieval evaluation harness and ran the experiment: 303 facts and 729 queries.</dd></div><div><dt>Outcome</dt><dd>Compared four configurations in April 2026: OpenAI + Markdown led Recall@1, while Google + JSON led Recall@3. Category reports exposed weaknesses behind the aggregate.</dd></div></dl></section>
+    <section class="evidence-exhibit retrieval-exhibit" data-evidence="retrieval" data-step="0"><div class="exhibit-intro"><p>Memory retrieval</p><h2>A question.<br>Three candidates.<br>One expected fact.</h2><p>Inspect how ranking is scored, then compare the measured configurations below.</p></div><div class="retrieval-theatre"><div class="query-card"><small>Illustrative query</small><strong>When does the warranty expire?</strong><span>Query → similarity search</span></div><div class="ranked-list"><div><b>1</b><span>Appliance warranty end date<small>Expected fact</small></span><i>✓</i></div><div><b>2</b><span>Appliance purchase date<small>Related context</small></span></div><div><b>3</b><span>Service contact details<small>Other context</small></span></div></div></div><div class="evidence-controls" hidden><button data-evidence-step="0" aria-pressed="true">Query</button><button data-evidence-step="1" aria-pressed="false">Rank candidates</button><button data-evidence-step="2" aria-pressed="false">Score expected fact</button></div><div class="evidence-playback" hidden><div class="evidence-progress" role="progressbar" aria-label="Story progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><i></i></div><div class="evidence-transport"><span class="evidence-position"></span><button type="button" data-evidence-play>Play story</button><button type="button" data-evidence-replay>Restart</button><a href="#turn-retrieval-results-into-a-configuration-decision">Read the case study ↓</a></div></div><div class="evidence-panels"><section data-evidence-panel="0"><h3>Ask in plain language.</h3><p>This schematic query explains the process. It is not a recorded benchmark result.</p></section><section data-evidence-panel="1"><h3>Keep the top three candidates.</h3><p>The harness compares their IDs with the expected fact for each query.</p></section><section data-evidence-panel="2"><h3>Measure retrieval, then compare.</h3><p>Recall checks whether the expected fact is present. MRR@3 also accounts for its rank.</p></section></div><div class="verified-result"><strong>93.8% <small>Recall@3</small></strong><p>OpenAI + Markdown · 729 queries · 303 facts<br>Measured 10 April 2026. Google + JSON led Recall@3 at 94.7%; OpenAI + Markdown led Recall@1 at 82.7%.</p></div></section>
+    <div class="article-layout"><article class="prose "><p>I authored a retrieval evaluation harness that tested <strong>303 facts against 729 queries</strong> across four model and data-format configurations. The OpenAI + Markdown configuration reached <strong>93.8% Recall@3 and 0.878 MRR@3</strong>.</p>
+<p>I built the harness and ran the experiment to guide memory retrieval for the agent platform. It scored expected facts, reported individual query outcomes and compared performance across direct, paraphrased, temporal and adversarial questions.</p>
+<p>This report supports the <a href="../agent-platform/index.html#build-persistent-relationship-aware-memory">persistent memory story</a>. It records the April 2026 experiment, not a benchmark of every later service version.</p>
+<h2 id="turn-retrieval-results-into-a-configuration-decision">Turn retrieval results into a configuration decision</h2>
+<p>I compared OpenAI and Google embeddings with JSON and Markdown representations, keeping the facts and query set consistent across configurations. Aggregate scores established the overall result, while category reports showed where ranking behavior changed.</p>
+<p>OpenAI + Markdown led on Recall@1, which informed the retained report's recommendation. Google + JSON led on Recall@3. That distinction made configuration choice depend on how the agent consumed retrieved evidence.</p>
+<h2 id="experiment-and-construction">Experiment and construction</h2>
+<p>The report was generated on <strong>10 April 2026</strong>. It evaluated <strong>303 home-management facts, including 110 adversarial facts, against 729 queries</strong>. Local fact definitions and a query-construction module produced this internal benchmark and its expected-fact mappings.</p>
+<p>Each query identified <strong>one expected fact ID</strong>. The same facts were represented as JSON or Markdown. Each model/configuration used its own pgvector table; queries remained plain text. Retrieval used cosine distance and returned three candidates.</p>
+<ul>
+<li>OpenAI: <code>text-embedding-3-large</code>, 3,072 dimensions.</li>
+<li>Google: <code>models/gemini-embedding-001</code>, 3,072 dimensions.</li>
+<li>Recall@1 / Recall@3: fraction of queries with the expected fact in that prefix.</li>
+<li>MRR@3: reciprocal rank of that fact within the first three results, zero when absent.</li>
+</ul>
+<p>The report's MRR values are shown as <strong>MRR@3</strong>, reflecting its three-result cutoff.</p>
+<h2 id="observed-results">Observed results</h2>
+<div class="table-scroll" role="region" aria-label="Results table, scroll horizontally if needed" tabindex="0"><table>
+<thead>
+<tr>
+<th scope="col">Configuration</th>
+<th style="text-align:right">Recall@1</th>
+<th style="text-align:right">Recall@3</th>
+<th style="text-align:right">MRR@3</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>OpenAI + Markdown</td>
+<td style="text-align:right">82.7%</td>
+<td style="text-align:right">93.8%</td>
+<td style="text-align:right">0.878</td>
+</tr>
+<tr>
+<td>OpenAI + JSON</td>
+<td style="text-align:right">82.4%</td>
+<td style="text-align:right">93.0%</td>
+<td style="text-align:right">0.873</td>
+</tr>
+<tr>
+<td>Google + JSON</td>
+<td style="text-align:right">81.3%</td>
+<td style="text-align:right">94.7%</td>
+<td style="text-align:right">0.875</td>
+</tr>
+<tr>
+<td>Google + Markdown</td>
+<td style="text-align:right">81.3%</td>
+<td style="text-align:right">94.0%</td>
+<td style="text-align:right">0.872</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="category-level-results">Category-level results</h2>
+<p>Selected OpenAI + Markdown Recall@1 slices:</p>
+<p>These category scores measure first-result accuracy (Recall@1). The headline 93.8% measures finding the expected fact among the top three results (Recall@3). Adversarial queries tested difficult ranking cases, including facts with similar wording across different household domains.</p>
+<div class="table-scroll" role="region" aria-label="Results table, scroll horizontally if needed" tabindex="0"><table>
+<thead>
+<tr>
+<th scope="col">Original difficulty label</th>
+<th style="text-align:right">Recall@1</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>direct</td>
+<td style="text-align:right">95.6%</td>
+</tr>
+<tr>
+<td>paraphrase</td>
+<td style="text-align:right">96.5%</td>
+</tr>
+<tr>
+<td>adversarial_temporal</td>
+<td style="text-align:right">78.2%</td>
+</tr>
+<tr>
+<td>adversarial_entity</td>
+<td style="text-align:right">78.3%</td>
+</tr>
+<tr>
+<td>adversarial_semantic</td>
+<td style="text-align:right">58.7%</td>
+</tr>
+<tr>
+<td>adversarial_minimal</td>
+<td style="text-align:right">58.3%</td>
+</tr>
+<tr>
+<td>adversarial_crossdomain</td>
+<td style="text-align:right">30.8%</td>
+</tr>
+</tbody>
+</table></div>
+<p>The category breakdown made ranking differences visible during evaluation. Keeping the full results alongside the overall score supported configuration decisions and focused inspection of individual retrieval outcomes.</p>
+</article>
+    <aside><nav aria-label="On this page"><p>On this page</p><a href="#turn-retrieval-results-into-a-configuration-decision">Turn retrieval results into a configuration decision</a><a href="#experiment-and-construction">Experiment and construction</a><a href="#observed-results">Observed results</a><a href="#category-level-results">Category-level results</a></nav></aside></div>
+    <a class="portfolio-next next-agent-platform" href="../agent-platform/index.html"><div><small>Keep exploring</small><h2>Production AI with persistent memory</h2><p>Shipped capabilities, changing context and controlled actions.</p><span>Open case study ↗</span></div><div class="next-art" aria-hidden="true"><div class="project-exhibit product-exhibit" data-showcase="product" role="img" aria-label="A product interface connects persistent context to typed tools and controlled actions">
+<div class="exhibit-grid" aria-hidden="true"></div><div class="product-preview-world">
+<div class="preview-context"><span>Persistent context</span><div><i></i><i></i><i></i><i></i></div><small>Facts · relationships · history</small></div>
+<div class="preview-interface"><div class="preview-window"><i></i><i></i><i></i><span>Product interface</span></div><p>Understand the request.</p><div class="preview-message">Find the right information.</div><div class="preview-reply">Carry the context into the next step.</div><div class="preview-input">A useful outcome <span>↗</span></div></div>
+<div class="preview-tools"><span>Typed tools</span><strong>Context → proposal → approval</strong><small>Scoped inputs · recorded decisions</small></div></div><p class="exhibit-caption">The product, and the system behind it.</p></div></div></a></main><footer class="site-footer"><div><h2>Let's build it.</h2><a href="mailto:zaid.lattouf@gmail.com">zaid.lattouf@gmail.com <span aria-hidden="true">↗</span></a></div><nav class="portfolio-footer-links footer-details" aria-label="More about Zaid"><a href="https://github.com/ZaidLT">GitHub ↗</a><a href="../../cv/index.html">Career ↗</a></nav><div class="contact-fold" aria-hidden="true"><i></i><i></i></div></footer></body></html>
