@@ -1,0 +1,63 @@
+/* Selected work only. The unenhanced page shows fully open, readable exhibits. */
+.portfolio-work .product-exhibit { overflow: clip; overflow-clip-margin: 14px; }
+.portfolio-work .preview-message { position: relative; isolation: isolate; }
+.portfolio-work .preview-message::before {
+  content: ""; position: absolute; inset: 0; z-index: -1; border-radius: inherit;
+  background: #526ff4; transform-origin: left; transform: scaleX(var(--citation, 1));
+}
+.portfolio-work .mc-stage { perspective: 1200px; }
+.portfolio-work .mc-verso { transform-origin: right center; }
+.portfolio-work .mc-recto { transform-origin: left center; }
+.portfolio-work .mc-plate { transform-origin: 50% 50%; }
+.portfolio-work .portfolio-cloud {
+  grid-template-columns: minmax(0,.86fr) minmax(0,1.14fr);
+  position: relative; isolation: isolate; align-items: center;
+  padding: clamp(26px,3.4vw,54px); gap: clamp(24px,4.4vw,74px);
+  border: 1px solid #33415b; border-radius: 14px; overflow: hidden;
+  background: linear-gradient(112deg,#090e17 12%,#0c1422 65%,#111c30);
+}
+.portfolio-work .portfolio-cloud h3 { color: #f4f6fa; max-width: 14ch; font-size: clamp(31px,3.2vw,50px); letter-spacing: -.045em; line-height: 1.02; }
+.portfolio-work .portfolio-cloud .section-label { color: #c5cfe0; }
+.portfolio-work .portfolio-cloud .cloud-project-links { row-gap: 12px; }
+.cloud-cutaway { margin: 0; min-width: 0; color: #f4f6fa; }
+.cloud-cutaway figcaption {
+  color: #dbe4f4; font: 600 15px/1.4 Archivo,sans-serif;
+  padding: 0 0 12px; border-bottom: 1px solid #40506a;
+}
+.cut-drawing {
+  position: relative; isolation: isolate; display: grid;
+  grid-template-columns: minmax(0,1fr) minmax(118px,31%); align-items: stretch;
+  margin-block: 8px 4px;
+}
+.cut-drawing::before {
+  content: ""; position: absolute; inset: 0; z-index: -1;
+  background-image: linear-gradient(#839ec120 1px,transparent 1px),linear-gradient(90deg,#839ec120 1px,transparent 1px);
+  background-size: 22px 22px; mask-image: radial-gradient(ellipse at 44% 55%,#000 20%,transparent 70%);
+}
+.cut-drawing svg { width: 100%; height: auto; display: block; align-self: center; overflow: visible; }
+.cut-key { position: relative; min-height: 154px; margin: 0; }
+.cut-key > div { position: absolute; left: 0; right: 0; transform: translateY(-50%); padding-left: 10px; }
+.cut-key > div:nth-child(1) { top: 18%; }
+.cut-key > div:nth-child(2) { top: 53.25%; }
+.cut-key > div:nth-child(3) { top: 84%; }
+.cut-key dt { font: 650 clamp(15px,1.3vw,20px)/1.12 Archivo,sans-serif; color: #f4f6fa; }
+.cut-key dd { margin: 4px 0 0; color: #bdc9dc; font-size: clamp(12px,1.02vw,15px); line-height: 1.25; }
+.cut-leads path { stroke-dasharray: 1; }
+.cut-environments {
+  list-style: none; display: grid; grid-template-columns: repeat(3,minmax(0,1fr));
+  margin: 0; padding: 12px 0 0; border-top: 1px solid #40506a;
+}
+.cut-environments li { margin: 0; padding: 0 6px 0 12px; border-left: 1px solid #40506a; color: #edf2fa; font: 600 clamp(12px,1.1vw,16px)/1.35 Archivo,sans-serif; }
+.cut-environments li:first-child { border: 0; padding-left: 0; }
+.cut-environments small { display: block; margin-top: 2px; font: 400 12px/1.35 'IBM Plex Sans',sans-serif; color: #b1c0d5; }
+@media (max-width: 900px) {
+  .portfolio-work .portfolio-cloud { grid-template-columns: 1fr; }
+  .portfolio-work .portfolio-cloud h3 { max-width: none; }
+  .cloud-cutaway { width: 100%; max-width: 590px; justify-self: center; }
+}
+@media (max-width: 480px) {
+  .portfolio-work .portfolio-cloud { padding: 22px 16px; gap: 22px; }
+  .cut-drawing { grid-template-columns: minmax(0,1fr) 36%; }
+  .cut-key > div { padding-left: 5px; }
+  .cut-environments li { padding-left: 7px; }
+}

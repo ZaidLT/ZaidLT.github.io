@@ -1,0 +1,57 @@
+/* Secondary stories stay in normal document flow. No pinning or scroll capture. */
+.evidence-exhibit { min-width:0; }
+.evidence-exhibit .evidence-controls button[aria-pressed=true] { background:#2450db; border-color:#4a72f0; color:#fff; }
+.evidence-playback { grid-column:1/-1; min-width:0; }
+.evidence-playback[hidden] { display:none; }
+.evidence-progress { height:3px; background:#26314a; overflow:hidden; border-radius:3px; }
+.evidence-progress i { display:block; width:100%; height:100%; background:#4a72f0; transform:scaleX(0); transform-origin:left; }
+.evidence-transport { display:flex; gap:12px; align-items:center; flex-wrap:wrap; padding-top:14px; }
+.evidence-position { color:#d3dae5; font-size:13px; margin-right:auto; }
+.evidence-transport button { padding:10px 15px; min-height:44px; font:inherit; font-size:14px; background:#080e1b; border:1px solid #334b89; color:#fff; border-radius:8px; cursor:pointer; }
+.evidence-transport [data-evidence-play] { background:#2450db; border-color:#4a72f0; min-width:116px; }
+.evidence-transport a { font-size:13px; color:#f4f6fa; text-decoration-color:#4a72f0; text-underline-offset:4px; }
+.evidence-panels { min-height:90px; }
+.pipeline-exhibit .pipeline-theatre { height:340px; min-width:0; }
+.pipeline-exhibit .paper { box-sizing:border-box; width:170px; height:226px; overflow:hidden; }
+.evidence-exhibit[data-motion-ready] .paper,
+.evidence-exhibit[data-motion-ready] .ranked-list>div,
+.evidence-exhibit[data-motion-ready] .attention-tile { transition:none; }
+.pipeline-exhibit .recovery-loop { border:0; color:#d3dae5; left:0; right:0; bottom:0; text-align:center; }
+.recovery-route { position:absolute; bottom:26px; left:0; width:100%; height:72px; overflow:visible; fill:none; stroke-linecap:round; stroke-linejoin:round; pointer-events:none; }
+.route-track { stroke:#283c73; stroke-width:2; }
+.route-signal { stroke:#4a72f0; stroke-width:3; }
+.route-arrow { stroke:#4a72f0; stroke-width:2; }
+.extraction-scan { position:absolute; top:30px; left:0; right:0; height:2px; background:#2450db; box-shadow:0 0 14px #2450db99; opacity:0; }
+.retrieval-exhibit .ranked-list { margin-left:16px; }
+.retrieval-exhibit .ranked-list i { color:#fff; background:#2450db; width:28px; height:28px; display:grid; place-items:center; border-radius:50%; font-style:normal; }
+.retrieval-exhibit[data-step="2"] .ranked-list>div:first-child { background:#122d83; border-color:#4a72f0; }
+.operations-exhibit .attention-board { align-self:center; min-width:0; }
+.operations-exhibit .attention-tile i { background:#fff; }
+.operations-exhibit[data-step="1"] .attention-tile:last-child { background:#4a72f0; border-color:#fff; }
+/* A complete, readable overview when script is absent. */
+.evidence-exhibit:not([data-motion-ready]) .paper { opacity:1; }
+.pipeline-exhibit:not([data-motion-ready]) .source-paper { transform:rotateY(-20deg) rotateZ(-8deg); }
+.pipeline-exhibit:not([data-motion-ready]) .extracted-paper { transform:rotateY(-15deg); }
+.pipeline-exhibit:not([data-motion-ready]) .prepared-paper { transform:rotateY(-15deg) rotateZ(8deg); }
+.retrieval-exhibit:not([data-motion-ready]) .ranked-list>div { opacity:1; transform:none; }
+.evidence-exhibit[data-reduced=true] .evidence-playback button { display:none; }
+@media(max-width:767px) {
+  .evidence-exhibit { overflow:hidden; }
+  .evidence-exhibit .pipeline-theatre { height:290px; }
+  .pipeline-exhibit .paper { width:125px; height:190px; padding:12px; }
+  .evidence-transport { gap:10px; }
+  .evidence-position { flex-basis:100%; font-size:12px; }
+  .evidence-transport button { font-size:13px; }
+  .evidence-panels { min-height:110px; }
+  .retrieval-exhibit .ranked-list { margin-left:0; }
+  .ranked-list>div { padding:12px; gap:12px; }
+  .ranked-list>div>span { min-width:0; }
+  .ranked-list i { flex-shrink:0; }
+  .evidence-controls button { min-height:44px; }
+}
+@media(prefers-reduced-motion:reduce) { .evidence-exhibit * { transition:none!important; } }
+@media print {
+  .evidence-controls,.evidence-playback { display:none!important; }
+  .evidence-panels>section { display:block!important; }
+  .evidence-exhibit { break-inside:avoid; }
+}
